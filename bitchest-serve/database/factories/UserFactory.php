@@ -25,7 +25,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => 'testpassword', // password
+            'password' => bcrypt('testpassword'), // password
             'age' => $this->faker->numberBetween(18, 99),
             'state' => $this->faker->state(),
             'city' => $this->faker->city(),
@@ -34,7 +34,6 @@ class UserFactory extends Factory
             'amount' => $this->faker->numberBetween(1000, 10000000),
             'phone' => $this->faker->phoneNumber(),
             'role' => $this->faker->numberBetween(1, 2),
-            'remember_token' => Str::random(10),
         ];
     }
 
