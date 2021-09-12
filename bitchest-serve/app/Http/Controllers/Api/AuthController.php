@@ -10,6 +10,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // PostMan Test Login 
     public function register(Request $request)
     {
         $v = Validator::make($request->all(), [
@@ -32,6 +33,8 @@ class AuthController extends Controller
 
         return response()->json(['status' => 'success'], 200);
     }
+
+    // Api/Login
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -50,6 +53,7 @@ class AuthController extends Controller
             'msg' => 'Logged out Successfully.'
         ], 200);
     }
+    // Api/User 
     public function user()
     {
         $user = User::find(Auth::user()->id);
@@ -59,7 +63,8 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
-
+    
+    // Api/refresh token
     public function refresh()
     {
         if ($token = $this->guard()->refresh()) {
@@ -70,7 +75,7 @@ class AuthController extends Controller
 
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
-
+    // Guard
     private function guard()
     {
         return Auth::guard();
